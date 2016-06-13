@@ -1,13 +1,15 @@
 {
   "name": "isi-array",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
-  "publishConfig":{"registry":"https://registry.npmjs.org"},
-  "repository"  : {
-		"type" : "git",
-		"url"  : "https://github.com/trexpert/isi-array.git"
-	},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trexpert/isi-array.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
