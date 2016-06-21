@@ -1,15 +1,23 @@
 array prototype extenter for node.js
 ====================================
 
-Array prototype Extender. 
-
-Methods
--------
+Array prototype Extender.
+ 
+Export-Methods
+--------------
 - [isArray](#isArray)
+- [isFunction](#isFunction)
+- [isString](#isString)
+- [firstOrDefault](#firstOrDefault)
+
+Extended Methods
+----------------
 - [firstOrDefault](#firstOrDefault)
 - [each](#each)
 - [take](#take)
+- [skip](#skip)
 - [filter](#filter)
+- [groupBy](#groupBy)
 - [shuffle](#shuffle)
 - [contains](#contains)
 - [pushRange](#pushRange)
@@ -35,6 +43,40 @@ isiArray.isArray(obj3);
 // -> true
 ```
 
+### isFunction()
+**isFunction(objToTest)**
+
+Test an object to be a function
+
+```javascript
+var isiArray = require( 'isi-array' );
+isiArray.isFunction(undefined);
+// -> false
+
+isiArray.isFunction({});
+// -> false
+
+isiArray.isFunction(() => {});
+// -> true
+```
+
+### isString()
+**isString(objToTest)**
+
+Test an object to be a string
+
+```javascript
+var isiArray = require( 'isi-array' );
+isiArray.isString(undefined);
+// -> false
+
+isiArray.isString({});
+// -> false
+
+isiArray.isString("string to test");
+// -> true
+```
+
 ### firstOrDefault():
 **firstOrDefault(conditionFunc)**
 
@@ -56,8 +98,22 @@ isiArray.isArray(obj3);
 // NEED TO BE DOCUMENTED
 ```
 
+### skip():
+**skip(amount)**
+
+```javascript
+// NEED TO BE DOCUMENTED
+```
+
 ### filter():
 **filter(filterFunc)**
+
+```javascript
+// NEED TO BE DOCUMENTED
+```
+
+### groupBy():
+**groupBy(filterOrPropertyName, skipUndefined = false)**
 
 ```javascript
 // NEED TO BE DOCUMENTED

@@ -1,7 +1,7 @@
 {
   "name": "isi-array",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.0.4",
+  "description": "array prototype extenter for node.js",
   "main": "index.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
