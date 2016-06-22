@@ -5,14 +5,14 @@ Array prototype Extender.
  
 Export-Methods
 --------------
-- [isArray](#isArray)
-- [isFunction](#isFunction)
-- [isString](#isString)
-- [firstOrDefault](#firstOrDefault)
+- [isArray](#isarray)
+- [isFunction](#isfunction)
+- [isString](#isstring)
+- [firstOrDefault](#firstordefault)
 
 Extended Methods
 ----------------
-- [firstOrDefault](#firstOrDefault)
+- [firstOrDefault](#firstordefault)
 - [each](#each)
 - [take](#take)
 - [skip](#skip)
