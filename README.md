@@ -126,11 +126,27 @@ isiArray.isString("string to test");
 // NEED TO BE DOCUMENTED
 ```
 
-### contains():
-**contains(obj)**
+### contains ### 
+**.contains(objectOrArray)**
 
 ```javascript
-// NEED TO BE DOCUMENTED
+[1,2,3].contains(5)
+// -> false
+
+[1,2,3].contains(2)
+// -> true
+
+[1,2,3].contains([5, 8, 9])
+// -> false
+
+[1,2,3].contains([9])
+// -> false
+
+[1,2,3].contains([1])
+// -> true
+
+[1,2,3].contains([1, 2, 3])
+// -> true
 ```
 
 ### pushRange():

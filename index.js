@@ -104,6 +104,15 @@ Array.prototype.shuffle = function () {
  */
 
 Array.prototype.contains = function (obj) {
+	if (self.isArray( obj )) {
+		for (var i = 0; i < obj.length; ++i) {
+			if (this.contains( obj[i] ))
+				return true;
+		}
+
+		return false;
+	}
+
 	return this.indexOf( obj ) >= 0;
 };
 
