@@ -58,6 +58,19 @@ Array.prototype.filter = function (filterFunc) {
 	return result;
 };
 
+Array.prototype.notIn = function (targetArray, key) {
+	var result = [];
+
+	this.each( (sourceObj) => {
+		var equivalent = targetArray.firstOrDefault( (newObj) => { return sourceObj[key] == newObj[key]; } );
+		if (equivalent == undefined) {
+			result.push( sourceObj );
+		}
+	} );
+
+	return result;
+}
+
 Array.prototype.groupBy = function (func, skipUndefined) {
 	skipUndefined = skipUndefined === true;
 

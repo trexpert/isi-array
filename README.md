@@ -19,6 +19,7 @@ Extended Methods
 - [filter](#filter)
 - [groupBy](#groupBy)
 - [shuffle](#shuffle)
+- [notIn](#notin)
 - [contains](#contains)
 - [pushRange](#pushRange)
  
@@ -121,6 +122,13 @@ isiArray.isString("string to test");
 
 ### shuffle():
 **shuffle()**
+
+```javascript
+// NEED TO BE DOCUMENTED
+```
+
+### notIn():
+**notIn()**
 
 ```javascript
 // NEED TO BE DOCUMENTED
