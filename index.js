@@ -31,6 +31,12 @@ Array.prototype.each = function (runFunc) {
 	}
 };
 
+Array.prototype.eachR = function (runFunc) {
+	for (var i = this.length - 1; i >= 0; --i) {
+		runFunc( this[i], i );
+	}
+};
+
 Array.prototype.take = function (amount) {
 	var result = [];
 
