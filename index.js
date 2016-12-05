@@ -50,7 +50,7 @@ Array.prototype.take = function ( amount ) {
 
 Array.prototype.remove = function ( checkFunc ) {
 	for ( var i = this.length - 1; i >= 0; --i ) {
-		if ( checkFunc() ) {
+		if ( checkFunc( this[ i ] ) ) {
 			this.splice( i, 1 );
 		}
 	}
