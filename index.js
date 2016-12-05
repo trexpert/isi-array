@@ -48,6 +48,14 @@ Array.prototype.take = function ( amount ) {
 	return result;
 };
 
+Array.prototype.remove = function ( checkFunc ) {
+	for ( var i = this.length - 1; i >= 0; --i ) {
+		if ( checkFunc() ) {
+			this.splice( i, 1 );
+		}
+	}
+};
+
 Array.prototype.skip = function ( amount ) {
 	return this.slice( amount );
 };
