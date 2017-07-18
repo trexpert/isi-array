@@ -1,6 +1,6 @@
 {
   "name": "isi-array",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "array prototype extenter for node.js",
   "main": "index.js",
   "publishConfig": {
