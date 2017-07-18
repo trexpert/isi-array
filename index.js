@@ -12,15 +12,51 @@ exports.isString = function ( str ) {
 	return str != undefined && str.constructor === String;
 };
 
+exports.isObject = function ( str ) {
+	return str != undefined && str.constructor === Object;
+};
+
 exports.firstOrDefault = function ( arr, condition ) {
 	return self.isArray( arr ) ? arr.firstOrDefault( condition ) : undefined;
 };
 
 Array.prototype.firstOrDefault = function ( condition ) {
 	for ( var i = 0; i < this.length; ++i ) {
-		if ( condition == undefined || condition( this[ i ] ) == true ) {
-			return this[ i ];
+		if(condition == undefined)
+			return this[i];
+
+		if ( self.isFunction(condition) ) {
+			if(condition( this[ i ] ))
+			{
+				return this[ i ];
+			}
+			else
+				{
+					continue;
+				}
 		}
+
+		if(self.isObject(condition)){
+			var keyAmount = 0;
+			var continueOuter = false;
+			for(var key in condition){
+				++keyAmount;
+				if(this[ i ][key] != condition[key]){
+					continueOuter = true;
+					break;
+				}
+			}
+
+			if(continueOuter)
+				continue;
+
+			if(keyAmount == 0 && condition == this[i])
+				return this[i];
+
+			return this[i];
+		}
+
+		debugger;
 	}
 
 	return undefined;
@@ -50,7 +86,9 @@ Array.prototype.take = function ( amount ) {
 
 Array.prototype.remove = function ( checkFunc ) {
 	for ( var i = this.length - 1; i >= 0; --i ) {
-		if ( checkFunc( this[ i ] ) ) {
+		if ( self.isFunction(checkFunc) && checkFunc( this[ i ] ) ) {
+			this.splice( i, 1 );
+		}else if(checkFunc == this[ i ]){
 			this.splice( i, 1 );
 		}
 	}
