@@ -1,4 +1,12 @@
 var self = this;
+// Generic helper function that can be used for the three operations:
+// https://stackoverflow.com/questions/33356504/difference-and-intersection-of-two-arrays-containing-objects
+const operation = ( list1, list2, isUnion = false, intersectIdent = undefined ) =>
+		list1.filter(
+				(set => a => isUnion === set.has( intersectIdent !== undefined ? a[ intersectIdent ] :
+												  a ))( new Set( list2.map( b => intersectIdent !== undefined ?
+																				 b[ intersectIdent ] : b ) ) )
+		);
 
 exports.isArray = function ( arr ) {
 	return arr != undefined && arr.constructor === Array;
@@ -22,38 +30,43 @@ exports.firstOrDefault = function ( arr, condition ) {
 
 Array.prototype.firstOrDefault = function ( condition ) {
 	for ( var i = 0; i < this.length; ++i ) {
-		if(condition == undefined)
-			return this[i];
-
-		if ( self.isFunction(condition) ) {
-			if(condition( this[ i ] ))
-			{
-				return this[ i ];
-			}
-			else
-				{
-					continue;
-				}
+		if ( condition == undefined ) {
+			return this[ i ];
 		}
 
-		if(self.isObject(condition)){
-			var keyAmount = 0;
+		if ( self.isFunction( condition ) ) {
+			if ( condition( this[ i ] ) ) {
+				return this[ i ];
+			}
+			else {
+				continue;
+			}
+		}
+
+		if ( self.isObject( condition ) ) {
+			var keyAmount     = 0;
 			var continueOuter = false;
-			for(var key in condition){
+			for ( var key in condition ) {
 				++keyAmount;
-				if(this[ i ][key] != condition[key]){
+				if ( this[ i ][ key ] != condition[ key ] ) {
 					continueOuter = true;
 					break;
 				}
 			}
 
-			if(continueOuter)
+			if ( continueOuter ) {
 				continue;
+			}
 
-			if(keyAmount == 0 && condition == this[i])
-				return this[i];
+			if ( keyAmount == 0 && condition == this[ i ] ) {
+				return this[ i ];
+			}
 
-			return this[i];
+			return this[ i ];
+		}
+
+		if ( self.isString( condition ) ) {
+			return this.firstOrDefault( ( s ) => s === condition );
 		}
 
 		debugger;
@@ -86,9 +99,9 @@ Array.prototype.take = function ( amount ) {
 
 Array.prototype.remove = function ( checkFunc ) {
 	for ( var i = this.length - 1; i >= 0; --i ) {
-		if ( self.isFunction(checkFunc) && checkFunc( this[ i ] ) ) {
+		if ( self.isFunction( checkFunc ) && checkFunc( this[ i ] ) ) {
 			this.splice( i, 1 );
-		}else if(checkFunc == this[ i ]){
+		} else if ( checkFunc == this[ i ] ) {
 			this.splice( i, 1 );
 		}
 	}
@@ -125,8 +138,13 @@ Array.prototype.notIn = function ( targetArray, key ) {
 	return result;
 };
 
-Array.prototype.groupBy = function ( func, skipUndefined ) {
+Array.prototype.intersect = function ( array2, intersectIdent ) {
+	return operation( this, array2, true, intersectIdent );
+};
+
+Array.prototype.groupBy = function ( func, skipUndefined, returnArray ) {
 	skipUndefined = skipUndefined === true;
+	returnArray   = returnArray === true;
 
 	if ( func == undefined ) {
 		return;
@@ -136,10 +154,11 @@ Array.prototype.groupBy = function ( func, skipUndefined ) {
 	if ( self.isString( func ) ) {
 		return this.groupBy( function ( obj ) {
 			return obj[ func ];
-		} )
+		}, skipUndefined, returnArray );
 	}
 
-	var result = {};
+	var result = returnArray ? [] : {};
+
 	if ( self.isFunction( func ) ) {
 		for ( var i = 0; i < this.length; ++i ) {
 			var key = func( this[ i ] );
@@ -149,11 +168,24 @@ Array.prototype.groupBy = function ( func, skipUndefined ) {
 				key = "__default";
 			}
 
-			if ( result[ key ] == undefined ) {
-				result[ key ] = [];
+			var entry = { key : key, items : [] };
+
+			if ( returnArray ) {
+				var existingEntry = result.firstOrDefault( ( p ) => p !== undefined && p.key === key );
+				if ( existingEntry === undefined ) {
+					result.push( entry );
+				} else {
+					entry = existingEntry;
+				}
+			} else {
+				if ( result[ key ] == undefined ) {
+					result[ key ] = [];
+				}
 			}
 
-			result[ key ].push( this[ i ] );
+			var subList = returnArray ? entry.items : result[ key ];
+
+			subList.push( this[ i ] );
 		}
 	}
 
