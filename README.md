@@ -22,6 +22,7 @@ Extended Methods
 - [notIn](#notin)
 - [contains](#contains)
 - [pushRange](#pushRange)
+- [count](#count)
  
 ### isArray()
 **isArray(objToTest)**
@@ -164,10 +165,9 @@ isiArray.isString("string to test");
 // NEED TO BE DOCUMENTED
 ```
 
-#### Version History:
-**1.0.1**
-- published project on github
-- added callable functions to documentation
+### count():
+**count([condition])**
 
-**1.0.0**
-- initialize project
+```javascript
+// NEED TO BE DOCUMENTED
+```

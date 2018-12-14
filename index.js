@@ -37,8 +37,7 @@ Array.prototype.firstOrDefault = function ( condition ) {
 		if ( self.isFunction( condition ) ) {
 			if ( condition( this[ i ] ) ) {
 				return this[ i ];
-			}
-			else {
+			} else {
 				continue;
 			}
 		}
@@ -73,6 +72,19 @@ Array.prototype.firstOrDefault = function ( condition ) {
 	}
 
 	return undefined;
+};
+
+Array.prototype.count = function ( runFunc ) {
+	var matches = this.length;
+	if ( runFunc ) {
+		for ( var i = 0; i < this.length; ++i ) {
+			if ( !runFunc( this[ i ], i ) ) {
+				--matches;
+			}
+		}
+	}
+
+	return matches;
 };
 
 Array.prototype.each = function ( runFunc ) {
